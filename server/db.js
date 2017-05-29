@@ -31,12 +31,20 @@ reservations.reserve = function(reservation) {
 	db.set(key(reservation), reservation);
 };
 
+reservations.cleanup = function() {
+	db.forEach(function(key, val) {	
+		db.rm(key);
+	});
+};
+
 reservations.reservations = function(fromTime, toTime) {
 	var array = new Array();
-	db.forEach(function(key, val) {	
-		var timestamp = Number(key.substring(0, key.indexOf('_')));
-		if (fromTime < timestamp && toTime > timestamp) {
-			array.push(val);
+	db.forEach(function(key, val) {
+		if (val != null) {
+			var timestamp = Number(key.substring(0, key.indexOf('_')));
+			if (fromTime < timestamp && toTime > timestamp) {
+				array.push(val);
+			}			
 		}
 	});
 	return array;

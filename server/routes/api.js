@@ -8,8 +8,13 @@ const DB = require('../db.js');
 const Joi = require('joi');
 
 const reservationsSchema = Joi.object().keys({
-	fromTime: Joi.number().min(1495645010237).max(2095645010237),
-	toTime: Joi.number().min(1495645010237).max(2095645010237)
+	fromTime: Joi.number(),//.min(1495645010237).max(2095645010237),
+	toTime: Joi.number(),//.min(1495645010237).max(2095645010237)
+});
+
+router.post('/cleanup', (req, res) => {
+	DB.cleanup();
+	res.status(200).json('');
 });
 
 router.get('/reservations', (req, res) => {
@@ -23,8 +28,8 @@ router.get('/reservations', (req, res) => {
 });
 
 const reserveSchema = Joi.object().keys({
-	fromTime: Joi.number().min(1495645010237).max(2095645010237),
-	toTime: Joi.number().min(1495645010237).max(2095645010237),
+	fromTime: Joi.number(),//.min(1495645010237).max(2095645010237),
+	toTime: Joi.number(),//.min(1495645010237).max(2095645010237),
 	name: Joi.string(),
 	contactPhone: Joi.string(),
 	table: Joi.number().min(0).max(25)
@@ -46,18 +51,5 @@ router.post('/reserve', (req, res) => {
 		}		
 	});
 });
-
-// Get all reservations
-// router.get('/reservations', (req, res) => {
-//   // Get reservations from the mock api
-//   // This should ideally be replaced with a service that connects to MongoDB
-//   axios.get(`${API}/posts`)
-//     .then(reservations => {
-//       res.status(200).json(reservations.data);
-//     })
-//     .catch(error => {
-//       res.status(500).send(error)
-//     });
-// });
 
 module.exports = router;
