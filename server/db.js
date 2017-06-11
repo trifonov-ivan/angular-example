@@ -38,7 +38,7 @@ reservations.cleanup = function() {
 };
 
 reservations.remove = function(startTime, table) {
-	
+	db.rm(startTime+"_"+table.toString());
 }
 
 reservations.reservations = function(fromTime, toTime) {

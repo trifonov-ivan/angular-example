@@ -1,22 +1,22 @@
 <main class="container">
-	<section class="panel panel-default">
-		<div class="panel-body">
-			<app-calendar (selectedDate)="datePipe($event)"></app-calendar>
-		</div>
-	</section>
-	<section class="panel panel-default">
-		<div class="row">
-			<div class="panel-body col-md-6">
+	<div class="column col-md-6">
+		<section class="panel panel-default">
+			<div class="panel-body">
+				<app-calendar (selectedDate)="datePipe($event)"></app-calendar>
+			</div>
+		</section>
+		<section class="panel panel-default">
+			<div class="panel-body">
 				<app-table-selector (selectedTable)="tablePipe($event)"></app-table-selector>
 			</div>
-			<div class="panel-body col-md-6">
-				<app-reservations></app-reservations>
+		</section>
+		<section class="panel panel-default">
+			<div class="panel-body">
+				<app-reserve (reservationDone)="reservationDone($event)"></app-reserve>
 			</div>
-		</div>
-	</section>
-	<section class="panel panel-default">
-		<div class="panel-body">
-			<app-reserve></app-reserve>
-		</div>
-	</section>
+		</section>
+	</div>
+	<div class="column col-md-6">
+		<app-reservations (onCancel)="promoteCancel($event)"></app-reservations>
+	</div>
 </main>

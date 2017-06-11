@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "fabric": "registry:dt/fabric#1.5.0+20170324151803"
+  },
+  "globalDependencies": {
+    "jquery": "registry:dt/jquery#1.10.0+20170310222111"
+  }
+}

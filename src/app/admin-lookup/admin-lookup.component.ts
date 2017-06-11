@@ -39,4 +39,14 @@ export class AdminLookupComponent implements OnInit {
 		this.reserveComponent.active = true;
 		this.reserveComponent.table = table.id;
 	}
+
+	promoteCancel(event) {
+		this.tablesComponent.getTablesJSON(this.date);
+		this.reservationsComponent.refresh(this.date);
+	}
+
+	reservationDone(event) {
+		this.tablesComponent.getTablesJSON(this.date);
+		this.reservationsComponent.refresh(this.date);
+	}
 }

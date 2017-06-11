@@ -1,0 +1,12 @@
+<section class="panel panel-default">
+	<div class="panel-body">
+		<h4 class="card-title">
+			Столик {{ reservation.table }} {{ reservation.onDate }} for {{ reservation.length }} hours
+		</h4>
+		<p class="card-text">{{ reservation.name }}, contactPhone: {{ reservation.contactPhone }}</p>
+		<button class="btn btn-success" (click)="cancel()">Cancel</button>		
+	</div>
+</section>
+
+<div class="card card-block">
+</div>

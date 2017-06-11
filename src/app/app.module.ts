@@ -14,6 +14,7 @@ import { TableSelectorComponent } from './table-selector/table-selector.componen
 import { AdminLookupComponent } from './admin-lookup/admin-lookup.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import { ReserveComponent } from './reserve/reserve.component';
+import { ReservationComponent } from './reservation/reservation.component';
 
 const ROUTES = [
   {
@@ -47,7 +48,8 @@ const ROUTES = [
     TableSelectorComponent,
     AdminLookupComponent,
     CalendarComponent,
-    ReserveComponent
+    ReserveComponent,
+    ReservationComponent
   ],
   imports: [
     BrowserModule,

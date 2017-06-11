@@ -1,8 +1,3 @@
   <div class="row" *ngFor="let reservation of reservations">
-    <div class="card card-block">
-      <h4 class="card-title">Столик {{ reservation.table }} {{ reservation.onDate }} for {{ reservation.length }} hours</h4>
-      <p class="card-text">{{ reservation.name }}, contactPhone: {{ reservation.contactPhone }}</p>
-<!--       <a href="#" class="card-link">Card link</a>
-      <a href="#" class="card-link">Another link</a> -->
-    </div>
+     <app-reservation [reservation]=reservation (onCancel)="onChildCancel($event)"></app-reservation>
   </div>

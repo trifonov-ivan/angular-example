@@ -26,14 +26,14 @@ router.get('/tables', (req, res) => {
 	});	
 });
 
-const reservationsSchema = Joi.object().keys({
-	fromTime: Joi.number(),//.min(1495645010237).max(2095645010237),
-	toTime: Joi.number(),//.min(1495645010237).max(2095645010237)
-});
-
 router.post('/cleanup', (req, res) => {
 	DB.cleanup();
 	res.status(200).json('');
+});
+
+const reservationsSchema = Joi.object().keys({
+	fromTime: Joi.number(),//.min(1495645010237).max(2095645010237),
+	toTime: Joi.number(),//.min(1495645010237).max(2095645010237)
 });
 
 router.get('/reservations', (req, res) => {
@@ -66,6 +66,23 @@ router.post('/reserve', (req, res) => {
 					startTime: req.body.fromTime,
 					endTime: req.body.toTime,
 			})
+			res.status(200).json('');
+		}		
+	});
+});
+
+const removeSchema = Joi.object().keys({
+	startTime: Joi.number(),//.min(1495645010237).max(2095645010237),
+	table: Joi.number().min(0).max(25)
+});
+
+router.post('/cancel', (req, res) => {
+	Joi.validate(req.body, removeSchema, function (err, value){
+		if (err !== null) {
+			res.status(400).json(err);
+		} else {
+			console.log(req.body);
+			DB.remove(req.body.startTime, req.body.table)
 			res.status(200).json('');
 		}		
 	});

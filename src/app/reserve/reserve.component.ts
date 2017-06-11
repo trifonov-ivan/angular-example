@@ -10,9 +10,10 @@ import { ReservationsService, TimeSlot, TimeFrame } from '../reservations.servic
 export class ReserveComponent implements OnInit {
 
 	table = 1;
-	active = false;
+	@Output() active = false;
 
 	@Output() selectedDate = new EventEmitter<Date>();
+	@Output() reservationDone = new EventEmitter();
 
 	constructor(private reservationsService: ReservationsService) { }
 
@@ -27,9 +28,10 @@ export class ReserveComponent implements OnInit {
 		postObject.fromTime = fromDate;
 		postObject.toTime = toDate;
 		console.log(postObject);
-
-		this.reservationsService.reserve(postObject).subscribe(response => {
-			console.log("response");
-		})
+		this.active = false;
+		this.reservationsService.reserve(postObject).subscribe(
+			response => { this.reservationDone.emit({}); },
+			error => { this.reservationDone.emit({}); }
+			)
 	}
 }
