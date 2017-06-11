@@ -1,11 +1,30 @@
 const express = require('express');
 const router = express.Router();
+const path = require('path');
 
 // declare axios for making http requests
 const axios = require('axios');
 const API = 'https://jsonplaceholder.typicode.com';
 const DB = require('../db.js');
 const Joi = require('joi');
+const fs = require('fs');
+const _ = require('lodash');
+
+const tablesJSON = JSON.parse(fs.readFileSync(path.join(__dirname + '/../assets/tables.json'), 'utf8'));
+const tablesSchema = Joi.object().keys({
+	at: Joi.number(),//.min(1495645010237).max(2095645010237),
+});
+
+router.get('/tables', (req, res) => {
+	Joi.validate(req.query, tablesSchema, function (err, value){
+		var reservations = DB.reservationsAt(req.query.at)
+			.reduce((aggregate, value) => { aggregate[value.table] = value; return aggregate; }, {});
+		res.status(200).json({
+			reservations: reservations,
+			tables: tablesJSON
+		});
+	});	
+});
 
 const reservationsSchema = Joi.object().keys({
 	fromTime: Joi.number(),//.min(1495645010237).max(2095645010237),

@@ -37,12 +37,28 @@ reservations.cleanup = function() {
 	});
 };
 
+reservations.remove = function(startTime, table) {
+	
+}
+
 reservations.reservations = function(fromTime, toTime) {
 	var array = new Array();
 	db.forEach(function(key, val) {
 		if (val != null) {
-			var timestamp = Number(key.substring(0, key.indexOf('_')));
-			if (fromTime < timestamp && toTime > timestamp) {
+			if ((fromTime <= val.startTime && toTime >= val.startTime) || (val.startTime <= fromTime && val.endTime >= fromTime)) {
+				array.push(val);
+			}			
+		}
+	});
+	console.log(array);
+	return array;
+}
+
+reservations.reservationsAt = function(atTime) {
+	var array = new Array();
+	db.forEach(function(key, val) {
+		if (val != null) {
+			if (val.startTime <= atTime && val.endTime >= atTime) {
 				array.push(val);
 			}			
 		}
