@@ -1,0 +1,19 @@
+<div class="container" [hidden]="!active">
+    <h1>Reserve Form</h1>
+    <form  #reserveForm="ngForm" (ngSubmit)="onSubmit(reserveForm)">
+      <div class="form-group">
+        <label for="table">Table</label>
+        <input type="text" class="form-control" id="table" [(ngModel)]="table" name="table" readonly>
+      </div>
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" class="form-control" id="name" name="name" required ngModel>
+      </div>
+      <div class="form-group">
+        <label for="phone">Contact</label>
+        <input type="text" class="form-control" id="contactPhone" name="contactPhone" required ngModel>
+      </div>
+      <datetime id="fromTime" name="fromTime" required ngModel></datetime>
+      <button type="submit" class="btn btn-success">Submit</button>
+    </form>
+</div>

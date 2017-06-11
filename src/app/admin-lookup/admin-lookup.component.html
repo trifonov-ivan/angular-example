@@ -1,0 +1,22 @@
+<main class="container">
+	<section class="panel panel-default">
+		<div class="panel-body">
+			<app-calendar (selectedDate)="datePipe($event)"></app-calendar>
+		</div>
+	</section>
+	<section class="panel panel-default">
+		<div class="row">
+			<div class="panel-body col-md-6">
+				<app-table-selector (selectedTable)="tablePipe($event)"></app-table-selector>
+			</div>
+			<div class="panel-body col-md-6">
+				<app-reservations></app-reservations>
+			</div>
+		</div>
+	</section>
+	<section class="panel panel-default">
+		<div class="panel-body">
+			<app-reserve></app-reserve>
+		</div>
+	</section>
+</main>

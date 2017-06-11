@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { Http, Headers, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/map';
 
-enum TimeSlot {
+export enum TimeSlot {
 	Day = 1,
 	Week
 }
 
-class TimeFrame {
+export class TimeFrame {
 	from: Date;
 	to: Date;
 
@@ -40,5 +40,16 @@ export class ReservationsService {
   getAllReservations(timeframe: TimeFrame = new TimeFrame(new Date(), TimeSlot.Week) ) {
     return this.http.get('/api/reservations?fromTime=' + timeframe.from.getTime() + '&toTime=' + timeframe.to.getTime())
       .map(res => res.json());
+  }
+
+  getAllTables(date: Date = new Date()) {
+  	return this.http.get('/api/tables?at='+date.getTime())
+      .map(res => res.json());
+  }
+
+  reserve(object) {
+  	let headers = new Headers ({ 'Content-Type': 'application/json' });
+    let options = new RequestOptions({ headers: headers, method: "post" });
+  	return this.http.post('/api/reserve', JSON.stringify(object), options);
   }
 }
