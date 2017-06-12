@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ReservationsService, TimeSlot, TimeFrame } from '../reservations.service';
+import * as moment from 'moment'
 
 @Component({
 	selector: 'app-reservation',
@@ -14,13 +15,7 @@ export class ReservationComponent implements OnInit {
 	constructor(private reservationsService: ReservationsService) { }
 
 	ngOnInit() {
-		let d = new Date(this.reservation.startTime);
-		var curr_date = d.getDate();
-		var curr_month = d.getMonth() + 1;
-		var curr_year = d.getFullYear();
-
-		this.reservation.onDate = curr_year + "-" + curr_month + "-" + curr_date + " " + 
-			d.getHours() + ":" + d.getMinutes();
+		this.reservation.onDate = moment(new Date(this.reservation.startTime)).locale('ru').format('MMMM Do YYYY, hh:mm');
 		this.reservation.length = new Number(Math.abs(this.reservation.endTime - this.reservation.startTime) / 36e5).toPrecision(1);
 	}
 
